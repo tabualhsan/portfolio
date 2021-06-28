@@ -1,31 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-// import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
-import './App.css';
 import Pages from './pages';
 
+function App() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    // NOTE: Use your username below
+    fetch('https://gitconnected.com/v1/portfolio/tabualhsan')
+      .then(res => res.json())
+      .then(user => {
+        setUser(user);
+      });
+  }, []);
 
-const App = () => {
+  if (!user) {
+    return <div />;
+  }
 
-
-const [user, setUser] = useState(null);
-useEffect(() => {
-
-
-
-  fetch('https://gitconnected.com/v1/portfolio/tabualhsan')
-  .then(res => res.json())
-  .then(user => {
-    setUser(user);
-  });
-}, []);
-
-if (!user) {
-  return <div />;
-}
-
-return <Pages user={user} />;
-
+  return <Pages user={user} />;
 }
 
 export default App;
@@ -73,7 +64,7 @@ export default App;
 //       </div>
 //       </div>
  
-//   );
-// }
+
+// 
 
 
